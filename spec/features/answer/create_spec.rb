@@ -23,7 +23,7 @@ feature 'User can write the answer on the question page', %{
       expect(page).to have_content 'Text answer'
     end
 
-    scenario 'write an answer with errors' do
+    scenario 'write an answer with errors', js: true do
       click_on 'Create answer'
 
       expect(page).to have_content "Body can't be blank"
