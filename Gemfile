@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '3.0.4'
-gem 'jquery-rails'
 gem 'devise', '~> 4.0' # authentication
 gem 'slim-rails'
 

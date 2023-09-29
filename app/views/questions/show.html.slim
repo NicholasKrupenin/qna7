@@ -11,7 +11,8 @@ h2 Answers
     - if current_user&.author?(answer)
       p= button_to 'Delete answer', answer_path(answer), method: :delete
 
-= render 'shared/errors', resource: @answer
+.answers-errors
+  = render 'shared/errors', resource: @answer
 
 - if current_user.present?
   = form_with model: [@question, @answer] do |f|
