@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User can only delete his answer', %{
+feature 'User can only delete his answer', %q{
   To get a new response from the community
   As an authenticated user
   I would like to be able to delete my answer

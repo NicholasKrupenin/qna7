@@ -34,7 +34,6 @@ RSpec.describe QuestionsController, type: :controller do
     before { login(user) }
 
     before { get :new }
-    
     it 'assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
@@ -127,7 +126,6 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     before { login(user) }
-    
     let!(:question) { create(:question, user_id: user.id) }
 
     it 'deletes the question' do
@@ -140,3 +138,4 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 end
+

@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can sign up', %{
+feature 'User can sign up', %q{
   In order to ask questions
   As an unauthenticated user
   I'd like to be able to sign up
 } do
-
   describe 'Guest' do
     scenario 'tries to sign up with correct params' do
      visit new_user_registration_path
@@ -30,3 +29,4 @@ feature 'User can sign up', %{
     end
   end
 end
+
