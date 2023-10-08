@@ -1,7 +1,7 @@
 -if @best_answer
   .best
     = "Best answer:"
-    = render partial: 'answers/answer', object: @best_answer
+    = render partial: 'answers/best', object: @best_answer, as: :answer
     br
     = "Other answer:"
 = render partial: 'answers/answer', collection: @other_answers
