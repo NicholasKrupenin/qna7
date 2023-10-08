@@ -1,12 +1,10 @@
 h1= @question.title
 p= @question.body
-- if current_user&.author?(@question)
-  p= link_to 'Delete question', question_path(@question), method: :delete
 
 h2 Answers
 
 .answers
-  = render @question.answers
+  = render 'answers/star'
 
 .answers-errors
   = render 'shared/errors', resource: @answer

@@ -25,4 +25,3 @@ feature 'Guest can view the question and its answers', %q{
     end
   end
 end
-

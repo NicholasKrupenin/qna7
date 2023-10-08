@@ -1,13 +1,16 @@
-- if answer.persisted?
-  = answer.body
-  br
-    - if current_user&.author?(answer)
-      =link_to 'Delete answer', answer_path(answer), method: :delete
-      |>
-      =link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+.answer *{ "data-answer" => answer.id }
+  - if answer.persisted?
+    = answer.body
+    br
+      - if current_user&.author?(answer)
+        =link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
+        |>
+        =link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+        |>
+        =link_to 'Add star', star_answer_path(answer) , class: 'add-star-link', data: { answer_id: answer.id }, method: :patch, remote: true
 
-      = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-        = f.label :body, 'Your answer'
-        = f.text_area :body
-        = f.submit 'Save'
+        = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+          = f.label :body, 'Your answer'
+          = f.text_area :body
+          = f.submit 'Save'
 

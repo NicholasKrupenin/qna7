@@ -7,7 +7,7 @@ feature 'User can edit his answer', %q{
 } do
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question) }
+  given!(:answer) { create(:answer, question: question, user: user) }
 
   scenario 'Unauthenticated can not edit answer' do
     visit question_path(question)
@@ -17,9 +17,8 @@ feature 'User can edit his answer', %q{
 
   describe 'Authenticated user' do
     scenario 'edits his answer', js: true do
-      sign_in user
+      sign_in(user)
       visit question_path(question)
-
       click_on 'Edit'
 
       within '.answers' do

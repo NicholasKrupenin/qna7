@@ -42,8 +42,8 @@ feature 'User can write the answer on the question page', %q{
     sign_in(user)
     visit question_path(question)
 
-    fill_in 'Your answer', with: 'My answer'
-    click_on 'Create'
+    fill_in 'Body', with: 'My answer'
+    click_on 'Create answer'
 
     expect(current_path).to eq question_path(question)
     within '.answers' do
