@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User can only delete his auestion', %{
+feature 'User can only delete his question', %{
   To get a new response from the community
   As an authenticated user
   I would like to be able to delete my question
@@ -10,9 +10,9 @@ feature 'User can only delete his auestion', %{
   given(:user_not_author) { create(:user) }
   given!(:question) { create(:question, user_id: user.id) }
 
-  scenario 'Authenticated user delete his question' do
+  scenario 'Authenticated user delete his question', js: true do
     sign_in(user)
-    visit question_path(question)
+    visit root_path
     click_on 'Delete question'
 
     expect(page).to have_content 'Your question successfully delete.'

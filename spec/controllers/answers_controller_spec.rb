@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
-  let(:question) { create(:question, user_id: user.id) }
-  let(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
+  let(:starred_question) { create(:question, user: user, best_answer_id: answer.id) }
 
   describe 'GET #index' do
     let(:answers) { create_list(:answer, 3, question: question, user: user) }

@@ -1,4 +1,4 @@
-.answer *{ "data-answer" => answer.id }
+.answer class=["answer-id-#{answer.id}"]
   - if answer.persisted?
     = answer.body
     br
@@ -6,6 +6,8 @@
         =link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
         |>
         =link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+
+      - if current_user&.author?(answer.question)
         |>
         =link_to 'Add star', star_answer_path(answer) , class: 'add-star-link', data: { answer_id: answer.id }, method: :patch, remote: true
 

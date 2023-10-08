@@ -16,18 +16,18 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
-  def edit; end
-
   def create
     @question = Question.new(question_params)
     @question.user = current_user
 
     if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
+      redirect_to root_path, notice: 'Your question successfully created.'
     else
       render :new
     end
   end
+
+  def edit; end
 
   def update
     @question.update(question_params)
