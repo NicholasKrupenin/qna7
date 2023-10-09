@@ -1,0 +1,17 @@
+.question-errors
+  = render 'shared/errors', resource: @question
+
+.question
+  = link_to question.title, question_path(question)
+  - if current_user&.author?(question)
+    |>
+    =link_to 'Delete question', question_path(question), method: :delete, remote: true
+    |>
+    =link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id }
+
+    = form_with model: question, class: 'hidden', html: { id: "edit-question-#{question.id}" } do |f|
+      = f.label :title
+      = f.text_field :title
+      = f.label :body
+      = f.text_area :body
+      = f.submit 'Save'

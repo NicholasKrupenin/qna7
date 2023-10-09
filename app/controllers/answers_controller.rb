@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[index new show create]
-  before_action :load_answer, only: %i[show destroy]
+  before_action :load_answer, only: %i[show update destroy star]
 
   def index
     @answers = @question.answers
@@ -14,26 +14,36 @@ class AnswersController < ApplicationController
   def show; end
 
   def create
-    @answer = @question.answers.new(answer_params)
+    @answer = @question.answers.create(answer_params)
     @answer.user = current_user
+    @answer.save
+    best_answer
+  end
 
-    if @answer.save
-      redirect_to @question, notice: 'Your answer successfully created.'
-    else
-      render 'questions/show'
-    end
+  def update
+    @answer.update(answer_params)
+    @question = @answer.question
+    best_answer
   end
 
   def destroy
-    if current_user.author?(@answer)
-      @answer.destroy
-      redirect_to question_path(@answer.question), notice: 'Your answer successfully delete.'
-    else
-      redirect_to @answer
-    end
+    @answer.destroy if current_user.author?(@answer)
+    @question = @answer.question
+    best_answer
+  end
+
+  def star
+    @question = @answer.question
+    @question.mark_as_best(@answer)
+    best_answer
   end
 
   private
+
+  def best_answer
+    @best_answer = @question.best_answer
+    @other_answers = @question.answers.where.not(id: @question.best_answer_id)
+  end
 
   def find_question
     @question = Question.find(params[:question_id])

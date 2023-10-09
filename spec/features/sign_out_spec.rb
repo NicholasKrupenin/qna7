@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can sign out', %{
+feature 'User can sign out', %q{
   To end a session
   As an authenticated user
   I would like to be able to sign out
 } do
-
   given(:user) { create(:user) }
 
   scenario 'Registrered user tries to sign out' do

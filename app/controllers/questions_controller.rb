@@ -8,40 +8,35 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.new
+    @best_answer = @question.best_answer
+    @other_answers = @question.answers.where.not(id: @question.best_answer_id)
   end
 
   def new
     @question = Question.new
   end
 
-  def edit; end
-
   def create
     @question = Question.new(question_params)
     @question.user = current_user
 
     if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
+      redirect_to root_path, notice: 'Your question successfully created.'
     else
       render :new
     end
   end
 
+  def edit; end
+
   def update
-    if @question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(question_params)
+    @questions = Question.all
   end
 
   def destroy
-    if current_user.author?(@question)
-      @question.destroy
-      redirect_to questions_path, notice: 'Your question successfully delete.'
-    else
-      redirect_to @question
-    end
+    @question.destroy if current_user.author?(@question)
+    @questions = Question.all
   end
 
   private

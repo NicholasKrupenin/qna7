@@ -4,10 +4,9 @@ git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 ruby '3.0.4'
 gem 'devise', '~> 4.0' # authentication
 gem 'slim-rails'
-
 gem 'rubocop', '~> 1.56', require: false
 gem 'rubocop-rails', require: false
-
+gem 'sass-rails'
 gem 'rails-i18n', '~> 7.0'
 # Use faker for seed
 gem 'faker', '~> 3.0'
