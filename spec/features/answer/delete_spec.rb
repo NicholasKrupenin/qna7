@@ -16,6 +16,7 @@ feature 'User can only delete his answer', %q{
     click_on 'Delete answer'
 
     expect(page).to have_content 'Your answer successfully delete.'
+    expect(page).to_not have_content answer.body
   end
 
   scenario 'Authenticated user is trying to delete answer that is not their own', js: true do

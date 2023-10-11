@@ -8,4 +8,6 @@ Rails.application.routes.draw do
       patch :star, on: :member
     end
   end
+
+  resources :attachments, only: :destroy
 end

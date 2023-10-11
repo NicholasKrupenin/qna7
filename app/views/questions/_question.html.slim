@@ -1,6 +1,3 @@
-.question-errors
-  = render 'shared/errors', resource: @question
-
 .question
   = link_to question.title, question_path(question)
   - if current_user&.author?(question)
@@ -14,4 +11,17 @@
       = f.text_field :title
       = f.label :body
       = f.text_area :body
+      |>
+      = f.file_field :files, multiple: true
       = f.submit 'Save'
+
+  - if question.files.attached?
+    - question.files.each do |file|
+      .attach_file data-file-id = "#{file.id}"
+        br
+        = link_to file.filename.to_s, url_for(file)
+        - if current_user&.author?(question)
+          |>|
+          = link_to 'delete', attachment_path(file.id), method: :delete, remote: true
+    br
+    |---
