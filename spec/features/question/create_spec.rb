@@ -33,7 +33,7 @@ feature 'User can create question', %{
       fill_in 'Title', with: 'Text question'
       fill_in 'Body', with: 'text text text'
       attach_file ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"] do
-        find('input[name="answer[files][]"][id="answer_files"]').click
+        find('input[name="question[files][]"][id="question_files"]').click
       end
       click_on 'Ask'
       expect(page).to have_link 'rails_helper.rb'

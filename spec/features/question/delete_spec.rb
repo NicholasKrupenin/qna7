@@ -25,7 +25,7 @@ feature 'User can only delete his question', %{
     expect(page).to_not have_link 'Delete question'
   end
 
-  scenario 'Authenticated user and owner of the answer delete attach files', js: true do
+  scenario 'Authenticated user and owner of the question delete attach files', js: true do
     question.files.attach(io: File.open("#{Rails.root}/spec/rails_helper.rb"), filename: "rails_helper.rb")
     sign_in(user)
     visit root_path
@@ -33,7 +33,7 @@ feature 'User can only delete his question', %{
     expect(page).to have_link 'Delete'
   end
 
-  scenario 'Authenticated user and not owner of the answer delete attach files', js: true do
+  scenario 'Authenticated user and not owner of the question delete attach files', js: true do
     question.files.attach(io: File.open("#{Rails.root}/spec/rails_helper.rb"), filename: "rails_helper.rb")
     sign_in(user_not_author)
     visit root_path
