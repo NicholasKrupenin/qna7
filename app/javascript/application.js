@@ -6,8 +6,13 @@ import jquery from "jquery"
 window.jQuery = jquery
 window.$ = jquery
 
+import * as ActiveStorage from "@rails/activestorage"
+ActiveStorage.start()
+
 import Rails from '@rails/ujs'
 Rails.start()
+
+
 
 $(document).load('turbolinks:load', function(){
     if ($('.answers').length) {
