@@ -28,35 +28,24 @@ feature 'User can write the answer on the question page', %q{
 
       expect(page).to have_content "Body can't be blank"
     end
+
+    scenario 'write an answer with attached file' do
+      fill_in 'Body', with: 'Text answer'
+      attach_file ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"] do
+        find('input[name="answer[files][]"][id="answer_files"]').click
+      end
+      click_on 'Create answer'
+
+      expect(page).to have_link 'rails_helper.rb'
+      expect(page).to have_link 'spec_helper.rb'
+    end
   end
 
   describe 'An unauthenticated user' do
     scenario 'cannot create a answer' do
-      visit question_path(question)
+        visit question_path(question)
 
-      expect(page).not_to have_button 'Create answer'
+        expect(page).not_to have_button 'Create answer'
+      end
     end
-  end
-
-  scenario 'Authenticated user create answer', js: true do
-    sign_in(user)
-    visit question_path(question)
-
-    fill_in 'Body', with: 'My answer'
-    click_on 'Create answer'
-
-    expect(current_path).to eq question_path(question)
-    within '.answers' do
-      expect(page).to have_content 'My answer'
-    end
-  end
-
-  scenario 'Authenticated user creates answer with errors', js: true do
-    sign_in(user)
-    visit question_path(question)
-
-    click_on 'Create'
-
-    expect(page).to have_content "Body can't be blank"
-  end
 end

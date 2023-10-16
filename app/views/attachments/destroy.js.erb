@@ -1,0 +1,3 @@
+<% if @file.destroyed? %>
+  $('[data-file-id=<%= @file.id %>]').remove()
+<% end %>

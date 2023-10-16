@@ -3,6 +3,8 @@ class Question < ApplicationRecord
   belongs_to :user
   belongs_to :best_answer, class_name: 'Answer', optional: true
 
+  has_many_attached :files
+
   validates :body, :title, presence: true
 
   def mark_as_best(answer)
