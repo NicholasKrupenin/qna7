@@ -39,7 +39,7 @@ feature 'User can create question', %{
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'spec_helper.rb'
     end
-  end
+  end 
 
   scenario 'Unauthenticated user tries to ask a question' do
     visit root_path
