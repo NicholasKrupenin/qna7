@@ -38,7 +38,10 @@ gem 'jbuilder'
 
 gem "aws-sdk-s3", require: false
 
-gem "cocoon"
+gem 'jquery-rails'
+
+gem 'cocoon'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 

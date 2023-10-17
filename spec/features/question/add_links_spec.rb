@@ -9,9 +9,10 @@ feature 'User can add links to question', %q{
   given(:user) { create(:user) }
   given(:gist_url) { 'https://gist.github.com/NicholasKrupenin/8df1feb56ab0cb33422823f77c940fc4' }
 
-  scenario 'User adds link when asks question' do
+  scenario 'User adds link when asks question', js: true do
     sign_in(user)
-    visit new_question_path
+    visit root_path
+    click_on 'Ask question'
 
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'text text text'

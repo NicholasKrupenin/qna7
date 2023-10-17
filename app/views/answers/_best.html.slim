@@ -12,6 +12,13 @@
         = f.text_area :body
         |>
         = f.file_field :files, multiple: true
+        p Links:
+        = f.fields_for :links do |l|
+          = l.label :name, 'Link name'
+          = l.text_field :name
+          = l.label :url
+          = l.text_field :url
+        p
         = f.submit 'Save'
 
 
@@ -22,3 +29,9 @@
         - if current_user&.author?(answer)
           |>|
           = link_to 'delete', attachment_path(file.id), method: :delete, remote: true
+
+.links
+  p Links:
+  ul
+    - answer.links.each do |link|
+      li= link_to link.name, link.url

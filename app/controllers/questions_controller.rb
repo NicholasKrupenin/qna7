@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.new
+    @answer.links.build
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
   end
@@ -37,7 +38,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy if current_user.author?(@question)
-    @questions = Question.all
   end
 
   private

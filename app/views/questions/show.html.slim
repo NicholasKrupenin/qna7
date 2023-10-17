@@ -9,10 +9,18 @@ h2 Answers
 .answers-errors
   = render 'shared/errors', resource: @answer
 
+|---
 - if current_user.present?
   = form_with model: [@question, @answer], class: 'new_answer' do |f|
     = f.label :body
     = f.text_area :body
     |>
     = f.file_field :files, multiple: true
+    p Links:
+    = f.fields_for :links do |l|
+      = l.label :name, 'Link name'
+      = l.text_field :name
+      = l.label :url
+      = l.text_field :url
+    p
     = f.submit 'Create answer'
