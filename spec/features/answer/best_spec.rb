@@ -17,7 +17,6 @@ feature 'User can select best answer', %q{
   end
 
   describe 'Authenticated user', js: true do
-    given!(:answer) { create(:answer, question: question, user: user) }
 
     scenario 'selected best answer created by author' do
       sign_in(user)

@@ -1,6 +1,6 @@
 $('.answer-errors').html('<%= render 'shared/errors', resource: @answer %>');
 
 <% if @answer.destroyed? %>
-  $('.answers [data-answer-id="#{@answer.id}"]').remove()
-  $('.notice').html('Your question successfully delete.')
+  $('.answers .answer-id-<%= @answer.id %>').remove()
+  $('.notice').html('Your answer successfully delete.')
 <% end %>
