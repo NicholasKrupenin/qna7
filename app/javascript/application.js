@@ -19,16 +19,22 @@ $(document).load('turbolinks:load', function(){
     if ($('.answers').length) {
       $('.answers').on('click', '.edit-answer-link', function(e) {
         e.preventDefault()
-        $(this).hide()
+        $(this).toggle('hidden');
         var answerId = $(this).data('answerId')
-        $('form#edit-answer-' + answerId).removeClass('hidden')
+        $('form#edit-answer-' + answerId).toggle('hidden')
       })
     } else if ($('.question').length) {
     $('.question').on('click', '.edit-question-link', function(e) {
       e.preventDefault()
-      $(this).hide()
+      $(this).toggle('hidden');
       var questionId = $(this).data('questionId')
-      $('form#edit-question-' + questionId).removeClass('hidden')
+      $('form#edit-question-' + questionId).toggle('hidden')
+    })
+  } else if ($('.add-new-question').length) {
+    $('.add-new-question').on('click', function(e) {
+      e.preventDefault();
+      $(this).toggle('hidden');
+      $('.new_question').toggle('hidden');
     })
   }
 })
