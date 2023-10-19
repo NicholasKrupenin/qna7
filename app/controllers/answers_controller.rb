@@ -17,7 +17,6 @@ class AnswersController < ApplicationController
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     @answer.save
-    best_answer
   end
 
   def update

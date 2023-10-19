@@ -17,11 +17,10 @@
         |>
         = f.file_field :files, multiple: true
         p Links:
-        = f.fields_for :links do |l|
-          = l.label :name, 'Link name'
-          = l.text_field :name
-          = l.label :url
-          = l.text_field :url
+        = f.fields_for :links do |link|
+          = render 'shared/link_fields', f: link
+        .links
+          = link_to_add_association 'add task', f, :links, partial: 'shared/link_fields'
         p
         = f.submit 'Save'
 
