@@ -10,3 +10,4 @@ pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.8/lib/assets/compil
 pin "@rails/activestorage", to: "activestorage.esm.js"
 pin "@nathanvda/cocoon", to: "https://ga.jspm.io/npm:@nathanvda/cocoon@1.2.14/cocoon.js"
 pin_all_from "app/javascript/custom", under: "custom"
+pin "gist-client", to: "https://cdn.jsdelivr.net/npm/gist-client@1.1.1/index.js"

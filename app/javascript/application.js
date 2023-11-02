@@ -2,17 +2,19 @@
 import '@hotwired/turbo-rails'
 import 'controllers'
 
-import jquery from "jquery"
+import jquery from 'jquery'
 window.jQuery = jquery
 window.$ = jquery
 
-import "@nathanvda/cocoon"
+import '@nathanvda/cocoon'
 
-import "custom/answers"
-import "custom/question"
-import "custom/question_new"
+import 'custom/answers'
+import 'custom/question'
+import 'custom/question_new'
 
-import * as ActiveStorage from "@rails/activestorage"
+import gistClient from 'gist-client'
+
+import * as ActiveStorage from '@rails/activestorage'
 ActiveStorage.start()
 
 import Rails from '@rails/ujs'
