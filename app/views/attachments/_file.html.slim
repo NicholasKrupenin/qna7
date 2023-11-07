@@ -1,0 +1,5 @@
+.attach_file data-file-id = "#{file.id}"
+  = link_to file.filename.to_s, url_for(file)
+  - if current_user&.author?(obj)
+    |>|
+    = link_to 'delete', attachment_path(file.id), method: :delete, remote: true

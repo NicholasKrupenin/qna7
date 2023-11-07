@@ -11,11 +11,10 @@ import '@nathanvda/cocoon'
 import 'custom/answers'
 import 'custom/question'
 import 'custom/question_new'
-
-import gistClient from 'gist-client'
+import 'custom/gist_client'
 
 import * as ActiveStorage from '@rails/activestorage'
-ActiveStorage.start()
+ActiveStorage.start() 
 
 import Rails from '@rails/ujs'
 Rails.start()

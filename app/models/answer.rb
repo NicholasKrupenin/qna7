@@ -1,6 +1,8 @@
 class Answer < ApplicationRecord
   has_many :links, dependent: :destroy, as: :linkable
-  
+
+  has_one :regard
+
   belongs_to :question
   belongs_to :user
 

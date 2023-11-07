@@ -1,0 +1,3 @@
+class RegardsController < ApplicationController
+  
+end

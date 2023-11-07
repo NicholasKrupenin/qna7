@@ -5,4 +5,8 @@ class Link < ApplicationRecord
   validates :url, presence: true,
                   format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                                               message: "external_url is invalid" }
+
+  def gist?
+    url.match?(/^https:\/\/gist\.github\.com\/.*/)
+  end
 end

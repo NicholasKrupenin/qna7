@@ -4,7 +4,6 @@ class CreateLinks < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :url
       t.belongs_to :linkable, polymorphic: true
-      
       t.timestamps
     end
   end
