@@ -20,7 +20,7 @@
         = l.label :url
         = l.text_field :url
       p Regard:
-      = f.fields_for :regards do |r|
+      = f.fields_for :regard do |r|
         = r.label :name, 'Regard name'
         = r.text_field :name
         = r.file_field :pic
@@ -29,7 +29,10 @@
   - if question.files.attached?
     = render partial: 'attachments/file', collection: question.files, locals: { obj: question }
 
-
   - if question.links.present?
     .links
       = render question.links
+
+  -if question.regard.present?
+    .regard
+      = render partial: 'regards/regard', object: question.regard

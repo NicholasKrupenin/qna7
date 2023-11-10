@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  get 'check_reward', to: 'rewards#check_reward', as: 'reward'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "questions#index" 
+  root to: "questions#index"
 
   resources :questions, shallow: true do
     resources :answers do

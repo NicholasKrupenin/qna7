@@ -19,11 +19,11 @@ p= link_to 'Ask question', '#', class: 'add-new-question'
   .links
     = link_to_add_association 'add task', f, :links, partial: 'shared/link_fields'
   p Regard:
-  = f.fields_for :regards do |r|
+  = f.fields_for :regard do |r|
     = r.label :name, 'Regard name'
     = r.text_field :name
     = r.file_field :pic
   = f.submit 'Ask'
   br
-  = link_to 'Back', root_path
 
+  = link_to 'Back', root_path

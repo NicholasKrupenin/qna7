@@ -15,5 +15,7 @@ class Question < ApplicationRecord
 
   def mark_as_best(answer)
     update(best_answer_id: answer.id)
+    answers.find_by(reward: true)&.update(reward: false)
+    answer.update(reward: true) if regard.present?
   end
 end

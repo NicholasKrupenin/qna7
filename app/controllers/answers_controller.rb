@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[index new show create]
-  before_action :load_answer, only: %i[show update destroy star del_file]
+  before_action :load_answer, only: %i[show update destroy star]
 
   def index
     @answers = @question.answers

@@ -1,0 +1,5 @@
+.link [data-link-id=gist.id]
+  = git_embed(gist.git_id)
+  - if current_user&.author?(gist.linkable)
+    |>
+    = link_to 'delete', link_path(gist), method: :delete, remote: true

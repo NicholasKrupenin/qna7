@@ -11,7 +11,8 @@ import '@nathanvda/cocoon'
 import 'custom/answers'
 import 'custom/question'
 import 'custom/question_new'
-import 'custom/gist_client'
+
+import 'gist-embed'
 
 import * as ActiveStorage from '@rails/activestorage'
 ActiveStorage.start() 

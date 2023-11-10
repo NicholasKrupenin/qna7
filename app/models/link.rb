@@ -9,4 +9,10 @@ class Link < ApplicationRecord
   def gist?
     url.match?(/^https:\/\/gist\.github\.com\/.*/)
   end
+
+  def git_id
+    match_data = url.match(/^https:\/\/gist\.github\.com\/.*\/(?<gist>.*)/)
+    match_data ? match_data[:gist] : nil
+  end
+  
 end
