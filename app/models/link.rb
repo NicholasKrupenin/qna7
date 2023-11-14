@@ -14,5 +14,4 @@ class Link < ApplicationRecord
     match_data = url.match(/^https:\/\/gist\.github\.com\/.*\/(?<gist>.*)/)
     match_data ? match_data[:gist] : nil
   end
-  
 end

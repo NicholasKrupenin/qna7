@@ -9,9 +9,8 @@ window.$ = jquery
 import '@nathanvda/cocoon'
 
 import 'custom/answers'
-import 'custom/question'
 import 'custom/question_new'
-
+import 'custom/question_update'
 import 'gist-embed'
 
 import * as ActiveStorage from '@rails/activestorage'

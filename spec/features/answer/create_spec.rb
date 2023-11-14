@@ -31,9 +31,7 @@ feature 'User can write the answer on the question page', %q{
 
     scenario 'write an answer with attached file' do
       fill_in 'Body', with: 'Text answer'
-      attach_file ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"] do
-        find('input[name="answer[files][]"][id="answer_files"]').click
-      end
+      attach_file('answer[files][]', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"])
       click_on 'Create answer'
 
       expect(page).to have_link 'rails_helper.rb'

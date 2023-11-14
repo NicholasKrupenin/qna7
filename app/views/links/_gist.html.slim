@@ -1,4 +1,6 @@
 .link [data-link-id=gist.id]
+  = gist.name
+  |>
   = git_embed(gist.git_id)
   - if current_user&.author?(gist.linkable)
     |>

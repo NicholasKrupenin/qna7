@@ -25,34 +25,12 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:question)).to eq question
     end
 
-    it 'assigns new answer for question' do
+    it 'assigns new answer' do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
     it 'renders show view' do
       expect(response).to render_template :show
-    end
-  end
-
-  describe 'GET #new' do
-    before { login(user) }
-
-    before { get :new }
-    it 'assigns a new Question to @question' do
-      expect(assigns(:question)).to be_a_new(Question)
-    end
-    
-    it 'assigns a new Question to @question' do
-      expect(assigns(:question).links.first).to be_a_new(Link)
-    end
-
-    it 'assigns new link for answer' do
-      expect(assigns(:question).links.first).to be_a_new(Link)
-    end
-
-
-    it 'renders new view' do
-      expect(response).to render_template :new
     end
   end
 
@@ -75,25 +53,23 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with valid attributes' do
       it 'save a new question in the database' do
-        count = Question.count
-
-        expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        expect { post :create, params: { question: attributes_for(:question) }, format: :js }.to change(Question, :count).by(1)
       end
 
-      it 'redirects to show view' do
-        post :create, params: { question: attributes_for(:question) }
-        expect(response).to redirect_to root_path
+      it 'redirects to create' do
+        post :create, params: { question: attributes_for(:question), format: :js }
+        expect(response).to render_template :create
       end
     end
 
     context 'with invalid attributes' do
       it 'does not save the question' do
-        expect { post :create, params: { question: attributes_for(:question, :invalid) } }.to_not change(Question, :count)
+        expect { post :create, params: { question: attributes_for(:question, :invalid) }, format: :js  }.to_not change(Question, :count)
       end
 
       it 're-renders new view' do
-        post :create, params: { question: attributes_for(:question, :invalid) }
-        expect(response).to render_template :new
+        post :create, params: { question: attributes_for(:question, :invalid), format: :js  }
+        expect(response).to render_template :create
       end
     end
   end

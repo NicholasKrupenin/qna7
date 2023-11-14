@@ -16,8 +16,6 @@ class QuestionsController < ApplicationController
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
   end
 
-  def new; end
-
   def create
     @question = Question.new(question_params)
     @question.user = current_user
