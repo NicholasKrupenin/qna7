@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[index new show create]
-  before_action :load_answer, only: %i[show update destroy star del_file]
+  before_action :load_answer, only: %i[show update destroy star]
 
   def index
     @answers = @question.answers
@@ -11,13 +11,10 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new
   end
 
-  def show; end
-
   def create
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     @answer.save
-    best_answer
   end
 
   def update
@@ -54,6 +51,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, files: [])
+    params.require(:answer).permit(:body, files: [], links_attributes: [:name, :url])
   end
 end

@@ -16,14 +16,20 @@
         = f.text_area :body
         |>
         = f.file_field :files, multiple: true
+        p Links:
+        = f.fields_for :links do |link|
+          = render 'shared/link_fields', f: link
+        .links
+          = link_to_add_association 'add task', f, :links, partial: 'shared/link_fields'
+        p
         = f.submit 'Save'
 
 
   - if answer.files.attached?
-    - answer.files.each do |file|
-      .attach_file data-file-id = "#{file.id}"
-        = link_to file.filename.to_s, url_for(file)
-        - if current_user&.author?(answer)
-          |>|
-          = link_to 'delete', attachment_path(file.id), method: :delete, remote: true
-    |---
+    = render partial: 'attachments/file', collection: answer.files, locals: { obj: answer }
+
+
+  - if answer.links.present?
+    .links
+      = render partial: 'links/link', collection: answer.links
+

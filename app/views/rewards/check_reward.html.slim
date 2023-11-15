@@ -1,0 +1,6 @@
+- @answer_rewards.each do |reward|
+  = reward.question.title
+  |>
+  = render partial: 'regards/regard', object: reward.question.regard
+  br
+= link_to 'Back', root_path

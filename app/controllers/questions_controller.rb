@@ -4,27 +4,22 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @question = Question.new
+    @question.links.build
+    @question.build_regard
   end
 
   def show
     @answer = @question.answers.new
+    @answer.links.build
     @best_answer = @question.best_answer
     @other_answers = @question.answers.where.not(id: @question.best_answer_id)
-  end
-
-  def new
-    @question = Question.new
   end
 
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-
-    if @question.save
-      redirect_to root_path, notice: 'Your question successfully created.'
-    else
-      render :new
-    end
+    @question.save
   end
 
   def edit; end
@@ -36,7 +31,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy if current_user.author?(@question)
-    @questions = Question.all
   end
 
   private
@@ -46,6 +40,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body, files: [], links_attributes: [:name, :url],
+                                      regard_attributes: [:name, :pic])
   end
 end

@@ -7,7 +7,9 @@ feature 'User can select best answer', %q{
   given!(:user) { create(:user) }
   given!(:another_user) { create(:user) }
   given!(:question) { create(:question, user: user) }
+  given!(:regard) { create(:regard, question: question) }
   given!(:answer) { create(:answer, question: question, user: user) }
+  given!(:link) { create(:link, :assoc_answer ) }
   given!(:another_answer) { create(:answer, :another, question: question, user: another_user) }
 
   scenario 'Unauthenticated can not select best answer' do
@@ -17,7 +19,6 @@ feature 'User can select best answer', %q{
   end
 
   describe 'Authenticated user', js: true do
-    given!(:answer) { create(:answer, question: question, user: user) }
 
     scenario 'selected best answer created by author' do
       sign_in(user)
@@ -55,6 +56,23 @@ feature 'User can select best answer', %q{
 
       expect(page).to_not have_link 'Add star'
       expect(page).to_not have_link 'Add star'
+    end
+
+    scenario 'selected best answer created by author with reward' do
+      sign_in(user)
+      visit question_path(question)
+
+      within ".answer-id-#{answer.id}" do
+        click_on 'Add star'
+      end
+
+      within '.best' do
+        expect(page).to have_content 'Best answer:'
+        expect(page).to have_content answer.body
+        expect(page).to_not have_link 'Add star'
+        expect(page).to have_content 'Your reward'
+        expect(page.find('img')['src']).to match(/space.jpg/)
+      end
     end
   end
 end

@@ -39,7 +39,7 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, params: { question_id: question, answer: attributes_for(:answer)}, format: :js }.to change(Answer, :count).by(1)
       end
 
-      it 'redirect to show view' do
+      it 'redirect to create' do
         post :create, params: { question_id: question, answer: attributes_for(:answer), format: :js }
         expect(response).to render_template :create
       end
@@ -86,6 +86,35 @@ RSpec.describe AnswersController, type: :controller do
         patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) }, format: :js
         expect(response).to render_template :update
       end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    before { login(user) }
+    let!(:answer) { create(:answer, question: question, user: user) }
+
+    it 'deletes the answer' do
+      expect { delete :destroy, params: { id: answer }, format: :js }.to change(Answer, :count).by(-1)
+    end
+
+    it 'redirects to index' do
+      delete :destroy, params: { id: answer }, format: :js
+      expect(response).to render_template :destroy
+    end
+  end
+
+  describe 'PATCH #star' do
+    before { login(user) }
+    let!(:answer) { create(:answer, question: question, user: user) }
+
+    it 'star answer' do
+      patch :star, params: { id: answer }, format: :js
+      expect(assigns(:question).best_answer_id).to eq answer.id
+    end
+
+    it 'redirects to star' do
+      patch :star, params: { id: answer }, format: :js
+      expect(response).to render_template :star
     end
   end
 end

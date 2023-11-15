@@ -1,4 +1,4 @@
-.question
+.question [data-question-id=question.id]
   = link_to question.title, question_path(question)
   - if current_user&.author?(question)
     |>
@@ -11,15 +11,28 @@
       = f.text_field :title
       = f.label :body
       = f.text_area :body
-      |>
+      p File/s:
       = f.file_field :files, multiple: true
+      p Links:
+      = f.fields_for :links do |l|
+        = l.label :name, 'Link name'
+        = l.text_field :name
+        = l.label :url
+        = l.text_field :url
+      p Regard:
+      = f.fields_for :regard do |r|
+        = r.label :name, 'Regard name'
+        = r.text_field :name
+        = r.file_field :pic
       = f.submit 'Save'
 
   - if question.files.attached?
-    - question.files.each do |file|
-      .attach_file data-file-id = "#{file.id}"
-        = link_to file.filename.to_s, url_for(file)
-        - if current_user&.author?(question)
-          |>|
-          = link_to 'delete', attachment_path(file.id), method: :delete, remote: true
-    |---
+    = render partial: 'attachments/file', collection: question.files, locals: { obj: question }
+
+  - if question.links.present?
+    .links
+      = render question.links
+
+  -if question.regard.present?
+    .regard
+      = render partial: 'regards/regard', object: question.regard

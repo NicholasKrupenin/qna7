@@ -2,41 +2,19 @@
 import '@hotwired/turbo-rails'
 import 'controllers'
 
-import jquery from "jquery"
+import jquery from 'jquery'
 window.jQuery = jquery
 window.$ = jquery
 
-import * as ActiveStorage from "@rails/activestorage"
-ActiveStorage.start()
+import '@nathanvda/cocoon'
+
+import 'custom/answers'
+import 'custom/question_new'
+import 'custom/question_update'
+import 'gist-embed'
+
+import * as ActiveStorage from '@rails/activestorage'
+ActiveStorage.start() 
 
 import Rails from '@rails/ujs'
 Rails.start()
-
-
-
-$(document).load('turbolinks:load', function(){
-    if ($('.answers').length) {
-      $('.answers').on('click', '.edit-answer-link', function(e) {
-        e.preventDefault()
-        $(this).hide()
-        var answerId = $(this).data('answerId')
-        $('form#edit-answer-' + answerId).removeClass('hidden')
-      })
-    } else if ($('.question').length) {
-    $('.question').on('click', '.edit-question-link', function(e) {
-      e.preventDefault()
-      $(this).hide()
-      var questionId = $(this).data('questionId')
-      $('form#edit-question-' + questionId).removeClass('hidden')
-    })
-  }
-})
-
-// $(document).load('turbolinks:load', function(){
-//   $('.question').on('click', '.edit-question-link', function(e) {
-//     e.preventDefault()
-//     $(this).hide()
-//     var questionId = $(this).data('questionId')
-//     $('form#edit-question-' + questionId).removeClass('hidden')
-//   })
-// })

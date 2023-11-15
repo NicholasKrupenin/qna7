@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def author?(resource)
     id == resource.user_id
   end
+
+  def available_reward
+    answers.where(reward: true)
+  end
 end

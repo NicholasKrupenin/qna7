@@ -17,9 +17,9 @@ RSpec.describe AttachmentsController, type: :controller do
     end
 
     it 'Render view' do
-       login(user)
-       delete :destroy, params: { id: question.files.first.id }, format: :js
-       expect(response).to render_template :destroy
+      login(user)
+      delete :destroy, params: { id: question.files.first.id }, format: :js
+      expect(response).to render_template :destroy
     end
 
     it 'Delete file another user' do

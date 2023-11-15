@@ -7,12 +7,20 @@ h2 Answers
   = render 'answers/star'
 
 .answers-errors
-  = render 'shared/errors', resource: @answer
 
+|---
 - if current_user.present?
   = form_with model: [@question, @answer], class: 'new_answer' do |f|
     = f.label :body
     = f.text_area :body
     |>
     = f.file_field :files, multiple: true
+    p Links:
+    = f.fields_for :links do |link|
+      = render 'shared/link_fields', f: link
+    .links
+      = link_to_add_association 'add task', f, :links, partial: 'shared/link_fields'
+    p
     = f.submit 'Create answer'
+
+= link_to 'Back', root_path
