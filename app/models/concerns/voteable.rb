@@ -6,7 +6,7 @@ module Voteable
   end
 
   def voted?(user)
-    votes.find_by(user_id: user.id).present?
+    votes.find_by(user_id: user).present?
   end
 
   def find_vote(user)

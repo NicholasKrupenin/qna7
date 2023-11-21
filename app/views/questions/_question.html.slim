@@ -7,11 +7,12 @@
     |>
     =link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id }
     |>
-  = vote_string_like(question)
-  |/
-  = vote_string_dislike(question)
-  |/
-  = deselect(question)
+  - else
+    = vote_string_like(question)
+    |/
+    = vote_string_dislike(question)
+    |/
+    = deselect(question)
   |   rating: 
   = rating(question)
 
