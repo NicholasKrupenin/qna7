@@ -5,8 +5,8 @@ module Voteable
     has_many :votes, dependent: :destroy, as: :voteable
   end
 
-  def voted?
-    votes.present?
+  def voted?(user)
+    votes.find_by(user_id: user.id).present?
   end
 
   def find_vote(user)

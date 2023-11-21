@@ -1,5 +1,5 @@
 $(document).load('turbolinks:load', function(){
-  $('a.vote_like').ajaxSuccess(function(e) {
-    $('.rating').html(e)
+  $('.vote_like').on('ajax:success', function(e) {
+    $('.raiting').html(e)
   })
 })

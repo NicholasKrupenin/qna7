@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       put :vote_like, as: :like
       put :vote_dislike, as: :dislike
+      delete :deselect
     end
   end
 
