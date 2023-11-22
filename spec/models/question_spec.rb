@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+require_relative './concerns/voteable_spec'
+
 RSpec.describe Question, type: :model do
   it { should have_many(:answers) }
   it { should belong_to(:best_answer).class_name('Answer').optional }
@@ -12,7 +14,14 @@ RSpec.describe Question, type: :model do
   it { should accept_nested_attributes_for :links }
   it { should accept_nested_attributes_for :regard }
 
-  it_behaves_like 'voteable'
+  let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
+
+  include_examples 'voteable', "Question" do
+    let(:object) { question }
+  end
 
   it 'have many attached files' do
     expect(Question.new.files).to be_an_instance_of(ActiveStorage::Attached::Many)
@@ -23,11 +32,8 @@ RSpec.describe Question, type: :model do
   end
 
   context '#mark_as_best' do
-    let!(:user) { create(:user) }
-    let!(:question) { create(:question, user: user) }
-    let!(:regard) { create(:regard, question: question) }
-    let!(:answer) { create(:answer, question: question, user: user) }
     let!(:best_answer) { create(:answer, reward: true, question: question, user: user) }
+    let!(:regard) { create(:regard, question: question) }
 
     it 'question have best answers' do
       question.mark_as_best(answer)

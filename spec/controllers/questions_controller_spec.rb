@@ -1,8 +1,14 @@
 require 'rails_helper'
 
+require_relative './concerns/voted_spec'
+
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question, user: user) }
   let(:user) { create(:user) }
+
+  include_examples 'voted' do
+    let(:object) { question }
+  end
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 3, user_id: user.id) }
@@ -57,7 +63,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 'redirects to create' do
-        post :create, params: { question: attributes_for(:question), format: :js }
+        post :create, params: { question: attributes_for(:question) }, format: :js
         expect(response).to render_template :create
       end
     end
