@@ -12,6 +12,7 @@ import 'custom/answers'
 import 'custom/question_new'
 import 'custom/question_update'
 import 'gist-embed'
+import 'custom/vote'
 
 import * as ActiveStorage from '@rails/activestorage'
 ActiveStorage.start() 

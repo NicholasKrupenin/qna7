@@ -23,7 +23,6 @@ feature 'User can edit his question', %q{
     expect(page).to_not have_link 'Edit'
   end
 
-
   describe 'Authenticated user', js: true do
     background do
       sign_in(user)

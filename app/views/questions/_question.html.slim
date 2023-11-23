@@ -1,30 +1,40 @@
 .question [data-question-id=question.id]
   = link_to question.title, question_path(question)
+  |>
   - if current_user&.author?(question)
     |>
     =link_to 'Delete question', question_path(question), method: :delete, remote: true
     |>
     =link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id }
+    |>
+  - else
+    = vote_string_like(question)
+    |/
+    = vote_string_dislike(question)
+    |/
+    = deselect(question)
+  |   rating: 
+  = rating(question)
 
-    = form_with model: question, class: 'hidden', html: { id: "edit-question-#{question.id}" } do |f|
-      = f.label :title
-      = f.text_field :title
-      = f.label :body
-      = f.text_area :body
-      p File/s:
-      = f.file_field :files, multiple: true
-      p Links:
-      = f.fields_for :links do |l|
-        = l.label :name, 'Link name'
-        = l.text_field :name
-        = l.label :url
-        = l.text_field :url
-      p Regard:
-      = f.fields_for :regard do |r|
-        = r.label :name, 'Regard name'
-        = r.text_field :name
-        = r.file_field :pic
-      = f.submit 'Save'
+  = form_with model: question, class: 'hidden', html: { id: "edit-question-#{question.id}" } do |f|
+    = f.label :title
+    = f.text_field :title
+    = f.label :body
+    = f.text_area :body
+    p File/s:
+    = f.file_field :files, multiple: true
+    p Links:
+    = f.fields_for :links do |l|
+      = l.label :name, 'Link name'
+      = l.text_field :name
+      = l.label :url
+      = l.text_field :url
+    p Regard:
+    = f.fields_for :regard do |r|
+      = r.label :name, 'Regard name'
+      = r.text_field :name
+      = r.file_field :pic
+    = f.submit 'Save'
 
   - if question.files.attached?
     = render partial: 'attachments/file', collection: question.files, locals: { obj: question }

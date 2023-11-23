@@ -1,10 +1,16 @@
 require 'rails_helper'
 
+require_relative './concerns/voted_spec'
+
 RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
   let(:starred_question) { create(:question, user: user, best_answer_id: answer.id) }
+
+  include_examples 'voted' do
+    let(:object) { answer }
+  end
 
   describe 'GET #index' do
     let(:answers) { create_list(:answer, 3, question: question, user: user) }
