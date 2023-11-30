@@ -1,9 +1,12 @@
 class AnswersController < ApplicationController
   include Voted
+  include Commented
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[index new show create]
   before_action :load_answer, only: %i[show update destroy star]
+
+  after_action :publish_answer, only: [:create]
 
   def index
     @answers = @question.answers
@@ -38,6 +41,18 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    ActionCable.server.broadcast(
+      "questions/#{params[:question_id]}/answers",
+      ApplicationController.render(
+        partial: 'answers/answer',
+        locals: { answer: @answer, current_user: current_user }
+      )
+    )
+  end
 
   def best_answer
     @best_answer = @question.best_answer
