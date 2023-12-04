@@ -20,6 +20,15 @@
   |   rating: 
   = rating(answer)
 
+.answer-comments [answer-id=answer.id]
+  = render partial: 'comments/show', collection: answer.comments, as: :comment
+
+= form_with scope: :comment, url: polymorphic_path(answer, action: :comment) do |f|
+  = f.label :body, 'Your comment '
+  = f.text_field :body
+  = f.submit 'create'
+
+br
   = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
     = f.label :body, 'Your answer'
     = f.text_area :body

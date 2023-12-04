@@ -42,6 +42,8 @@ gem 'jquery-rails'
 
 gem 'cocoon'
 
+gem 'gon'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 

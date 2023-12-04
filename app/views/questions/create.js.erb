@@ -1,8 +1,0 @@
-$('.questions-errors').html('<%= render 'shared/errors', resource: @question %>')
-
-<% if @question.persisted? %>
-  $('.questions').append('<%= j render @question %>')
-  $('.add-new-question').removeClass('hidden')
-  $('.new_question').addClass('hidden')
-  $('.notice').html('Your question successfully created.')
-<% end %>
