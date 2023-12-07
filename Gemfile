@@ -42,6 +42,8 @@ gem 'jquery-rails'
 
 gem 'cocoon'
 
+gem 'gon'
+
 #gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1'
 
 gem 'omniauth'
