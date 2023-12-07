@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
 ruby '3.0.4'
-gem 'devise', '~> 4.0' # authentication
+gem 'devise'
 gem 'slim-rails'
 gem 'rubocop', '~> 1.56', require: false
 gem 'rubocop-rails', require: false
@@ -42,6 +42,19 @@ gem 'jquery-rails'
 
 gem 'cocoon'
 
+#gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1'
+
+gem 'omniauth'
+
+gem 'omniauth-vkontakte'
+
+gem 'omniauth-spotify'
+
+gem 'omniauth-github', '~> 2.0.0'
+
+gem 'omniauth-rails_csrf_protection'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
@@ -69,12 +82,14 @@ group :development, :test do
   gem 'dotenv-rails' # environment variables
   gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
+  gem 'capybara-email'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
   gem 'i18n-debug', '~> 1.2'
+  gem "letter_opener"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem 'rack-mini-profiler'
 
