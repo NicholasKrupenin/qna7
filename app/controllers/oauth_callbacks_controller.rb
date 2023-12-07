@@ -23,4 +23,5 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
     else
       redirect_to root_path, alert: 'Something went wrong'
     end
+  end
 end
