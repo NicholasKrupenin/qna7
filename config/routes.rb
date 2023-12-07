@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
+  mount ActionCable.server => '/cable'
+  
   namespace :user do
     post '/send_email', to: 'send_email#create'
   end
