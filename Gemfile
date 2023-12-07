@@ -44,6 +44,7 @@ gem 'cocoon'
 
 gem 'gon'
 
+
 #gem 'omniauth-oauth2', '~> 1.7', '>= 1.7.1'
 
 gem 'omniauth'
@@ -55,7 +56,6 @@ gem 'omniauth-spotify'
 gem 'omniauth-github', '~> 2.0.0'
 
 gem 'omniauth-rails_csrf_protection'
-
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

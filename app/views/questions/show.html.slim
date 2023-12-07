@@ -1,6 +1,14 @@
 h1= @question.title
 p= @question.body
 
+.question_comments
+  = render partial: 'comments/show', collection: @question.comments, as: :comment
+
+  = form_with scope: :comment, url: polymorphic_path(@question, action: :comment) do |f|
+    = f.label :body, 'Your comment '
+    = f.text_field :body
+    = f.submit 'create'
+
 h2 Answers
 
 .answers

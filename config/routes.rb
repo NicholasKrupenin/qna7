@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
   mount ActionCable.server => '/cable'
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
   namespace :user do
     post '/send_email', to: 'send_email#create'
   end
+
 
   concern :voteable do
     member do
@@ -15,13 +17,19 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :commentable do
+    member do
+      post :comment
+    end
+  end
+
   get 'check_reward', to: 'rewards#check_reward', as: 'reward'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "questions#index"
 
-  resources :questions, shallow: true, except: :new, concerns: :voteable do
-    resources :answers, except: :show, concerns: :voteable do
+  resources :questions, shallow: true, except: :new, concerns: %i[voteable commentable] do
+    resources :answers, except: :show, concerns: %i[voteable commentable] do
       patch :star, on: :member
     end
   end
