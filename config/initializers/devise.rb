@@ -271,7 +271,16 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+
+  config.omniauth :vkontakte,
+                  Rails.application.credentials[Rails.env.to_sym][:vkontakte][:client_id],
+                  Rails.application.credentials[Rails.env.to_sym][:vkontakte][:client_secret],
+                  client_options: { auth_scheme: 'request_body' }
+
+  config.omniauth :github,
+                  Rails.application.credentials[Rails.env.to_sym][:github][:client_id],
+                  Rails.application.credentials[Rails.env.to_sym][:github][:client_secret],
+                  scope: 'user:send_email, read:user'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
