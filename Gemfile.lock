@@ -91,6 +91,7 @@ GEM
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.5.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -143,9 +144,7 @@ GEM
       i18n (>= 0.7)
       multi_json
       request_store (>= 1.0)
-
     hashie (5.0.0)
-
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
@@ -188,12 +187,8 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
-
     multi_xml (0.6.0)
-    net-imap (0.4.7)
-
     net-imap (0.3.7)
-
       date
       net-protocol
     net-pop (0.1.2)
@@ -295,11 +290,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
-
-    responders (3.1.1)
-
     responders (3.1.0)
-
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
@@ -414,6 +405,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   bootsnap
+  cancancan
   capybara
   capybara-email
   cocoon

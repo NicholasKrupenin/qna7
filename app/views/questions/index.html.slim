@@ -3,7 +3,7 @@
 .questions
   = render @questions
 
-- if current_user.present?
+- if can?(:create, Question)
   br
   p= link_to 'Ask question', '#', class: 'add-new-question'
 

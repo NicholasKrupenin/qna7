@@ -20,3 +20,4 @@ class User::SendEmailController < ApplicationController
     params.require(:user).permit(:email)
   end
 end
+
