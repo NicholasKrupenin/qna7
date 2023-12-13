@@ -2,18 +2,18 @@
   - if answer.persisted?
     = answer.body
     |>
-    - if current_user&.author?(answer)
+    - if can?(:update, answer)
       =link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
-      |>
+    - if can?(:destroy, answer)
       =link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
-    - else
+    - if can?([:vote_like, :vote_dislike, :deselect], answer)
       = vote_string_like(answer)
       |/
       = vote_string_dislike(answer)
       |/
       = deselect(answer)
 
-    - if current_user&.author?(answer.question)
+    - if can?(:star, answer)
       |>
       =link_to 'Add star', star_answer_path(answer) , class: 'add-star-link', data: { answer_id: answer.id }, method: :patch, remote: true
 
