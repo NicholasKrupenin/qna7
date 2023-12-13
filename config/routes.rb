@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
 
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
@@ -8,6 +9,15 @@ Rails.application.routes.draw do
     post '/send_email', to: 'send_email#create'
   end
 
+ namespace :api do
+    namespace :v1 do
+      resource :profiles, only: [] do
+        get :me, on: :collection
+      end
+
+      resources :questions, only: [:index]
+    end
+  end
 
   concern :voteable do
     member do
