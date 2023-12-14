@@ -7,6 +7,7 @@ RSpec.describe Question, type: :model do
   it { should belong_to(:best_answer).class_name('Answer').optional }
   it { should have_many(:links).dependent(:destroy) }
   it { should have_one(:regard) }
+  it { should have_many(:subscriptions).dependent(:destroy) }
 
   it { should validate_presence_of(:body) }
   it { should validate_presence_of(:title) }

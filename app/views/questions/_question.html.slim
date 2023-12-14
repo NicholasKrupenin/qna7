@@ -1,5 +1,7 @@
 .question [data-question-id=question.id]
   = link_to question.title, question_path(question)
+    .subscription
+      td= render 'subscriptions/subscription', resource: @question
   |>
   - if can?(:update, question)
     |>

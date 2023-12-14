@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     resources :answers, except: :show, concerns: %i[voteable commentable] do
       patch :star, on: :member
     end
+
+    resources :subscriptions, only: [:create, :destroy], shallow: true
   end
 
   resources :attachments, only: :destroy
