@@ -16,9 +16,17 @@ class Question < ApplicationRecord
 
   validates :body, :title, presence: true
 
+  after_create :calculate_reputation
+
   def mark_as_best(answer)
     update(best_answer_id: answer.id)
     answers.find_by(reward: true)&.update(reward: false)
     answer.update(reward: true) if regard.present?
+  end
+
+  private
+
+  def calculate_reputation
+    ReputationJob.perform_later(self)
   end
 end
