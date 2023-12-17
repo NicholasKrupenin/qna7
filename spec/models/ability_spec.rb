@@ -13,6 +13,10 @@ RSpec.describe Ability do
     it { should_not be_able_to :manage, :all }
   end
 
+  context 'subscriber can' do
+    it { should be_able_to [:create, :destroy], Subscription }
+  end
+
   describe 'for admin' do
     let(:user) { create :user, admin: true }
 

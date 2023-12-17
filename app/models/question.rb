@@ -4,6 +4,7 @@ class Question < ApplicationRecord
 
   has_many :answers, dependent: :destroy
   has_many :links, dependent: :destroy, as: :linkable
+  has_many :subscriptions, dependent: :destroy
 
   has_one :regard, dependent: :destroy
 
@@ -16,9 +17,17 @@ class Question < ApplicationRecord
 
   validates :body, :title, presence: true
 
+  after_create :calculate_reputation
+
   def mark_as_best(answer)
     update(best_answer_id: answer.id)
     answers.find_by(reward: true)&.update(reward: false)
     answer.update(reward: true) if regard.present?
+  end
+
+  private
+
+  def calculate_reputation
+    ReputationJob.perform_later(self)
   end
 end

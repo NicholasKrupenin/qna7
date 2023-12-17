@@ -7,6 +7,7 @@ RSpec.describe Question, type: :model do
   it { should belong_to(:best_answer).class_name('Answer').optional }
   it { should have_many(:links).dependent(:destroy) }
   it { should have_one(:regard) }
+  it { should have_many(:subscriptions).dependent(:destroy) }
 
   it { should validate_presence_of(:body) }
   it { should validate_presence_of(:title) }
@@ -47,6 +48,15 @@ RSpec.describe Question, type: :model do
       best_answer.reload
 
       expect(best_answer.reward).to_not be_truthy
+    end
+  end
+
+  describe 'reputation' do
+    let(:question) { build(:question) }
+
+    it 'calls ReputationJob' do
+      expect(ReputationJob).to receive(:perform_later).with(question)
+      question.save!
     end
   end
 end

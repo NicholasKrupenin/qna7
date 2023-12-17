@@ -20,5 +20,6 @@ module Qna
     # config.eager_load_paths << Rails.root.join("extras")
     config.action_view.form_with_generates_remote_forms = true
     config.autoload_paths += [config.root.join('app')]
+    config.active_job.queue_adapter = :sidekiq
   end
 end
