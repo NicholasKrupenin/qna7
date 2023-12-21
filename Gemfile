@@ -64,6 +64,9 @@ gem 'active_model_serializers', '~> 0.10'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+
+gem 'mysql2'
+gem 'thinking-sphinx'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
@@ -92,6 +95,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
   gem 'capybara-email'
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -10,8 +10,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
+  get 'search', to: 'search#search'
+
   mount ActionCable.server => '/cable'
-  
+
   namespace :user do
     post '/send_email', to: 'send_email#create'
   end
