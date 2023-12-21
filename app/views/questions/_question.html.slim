@@ -1,7 +1,7 @@
 .question [data-question-id=question.id]
   = link_to question.title, question_path(question)
-    .subscription
-      td= render 'subscriptions/subscription', resource: @question
+  .subscription
+    td= render 'subscriptions/subscription', resource: question
   |>
   - if can?(:update, question)
     |>
@@ -9,7 +9,7 @@
   - if can?(:destroy, question)
     =link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id }
     |>
-  - if can?([:vote_like, :vote_dislike, :deselect], question)
+  - unless can?([:vote_like, :vote_dislike, :deselect], question)
     = vote_string_like(question)
     |/
     = vote_string_dislike(question)
