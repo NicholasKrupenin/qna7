@@ -4,7 +4,7 @@
 # You can define all roles on a single server, or split them: 
 
 server "68.183.75.90", user: "deployer", roles: %w{app db web}, primary: true
-set :rail_env, :capistrano
+set :rail_env, :production
 
 # Custom SSH Options
 # ==================
