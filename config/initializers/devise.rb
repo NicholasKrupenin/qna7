@@ -272,11 +272,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
 
-  config.omniauth :vkontakte,
-                  Rails.application.credentials[Rails.env.to_sym][:vkontakte][:client_id],
-                  Rails.application.credentials[Rails.env.to_sym][:vkontakte][:client_secret],
-                  client_options: { auth_scheme: 'request_body' }
-
   config.omniauth :github,
                   Rails.application.credentials[Rails.env.to_sym][:github][:client_id],
                   Rails.application.credentials[Rails.env.to_sym][:github][:client_secret],
