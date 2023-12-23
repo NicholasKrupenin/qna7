@@ -9,7 +9,8 @@ set :deploy_to, "/home/deployer/qna"
 set :deploy_user, "deployer"
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", 'config/master.key', 'config/credentials.yml.enc'
+append :linked_files, "config/database.yml", 'config/master.key',
+                      'config/credentials.yml.enc', '.env'
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'storage'
 # Default value for default_env is {}
