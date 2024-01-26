@@ -4,5 +4,5 @@
     = render partial: 'answers/best', object: @best_answer, as: :answer
     br
     = "Other answer:"
-= render partial: 'answers/answer', collection: @other_answers
+= render partial: 'answers/answer', collection: @other_answers, cached: true
 

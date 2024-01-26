@@ -1,7 +1,7 @@
 .questions-errors
 
 .questions
-  = render @questions
+  = render partial: 'questions/question', collection: @questions, cached: true
 
 - if can?(:create, Question)
   br
